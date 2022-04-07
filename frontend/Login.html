@@ -96,12 +96,12 @@ body{
                 <div class="card">
                     <div class="card-header">Login</div>
                     <div class="card-body">
-                        <form action="" method="">
+                        <form class="maform">
 
                             <div class="form-group row">
                                 <label for="text" class="col-md-4 col-form-label text-md-right">Reference</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="Reference" class="form-control" name="Reference" required>
+                                    <input type="text" id="reference" class="form-control reference" name="reference" required>
                                 </div>
                             </div>                    
                             <div class="col-md-6 offset-md-4">
@@ -122,8 +122,38 @@ body{
 
 
 
+<script>
+
+    var ref = document.getElementById('reference').value;
 
 
+const form =document.querySelector('.maform');
+form.addEventListener('submit',function (e){
+    e.preventDefault();
+    const reference=document.querySelector('.reference').value;
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "reference": reference
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+fetch("http://localhost/brief6/User/login", requestOptions)
+  .then(response => response.json())
+  .then(res => {
+  localStorage.setItem('reference', JSON.stringify(res));
+   window.location.href = "./Homeclient.html";})
+   .catch(error => console.log('error', error));
+ });
+ 
+
+</script>
 
 
 </body>
