@@ -8,8 +8,8 @@
         public function getAll(){
             return $this->execute("SELECT * FROM cabinet");
         }
-        public function getOne($id){
-            return $this->execute("SELECT * FROM cabinet WHERE id = ?", [$id]);
+        public function getOne($reference){
+            return $this->execute("SELECT * FROM cabinet WHERE reference = ?", [$reference]);
         }
         public function add($data){
             return $this->execute("INSERT INTO `cabinet`(`id`, `day`, `order_`, `reference`) VALUES (null,?,?,?)", $data);

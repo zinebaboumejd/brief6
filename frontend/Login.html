@@ -128,7 +128,7 @@ body{
 
 
 const form =document.querySelector('.maform');
-form.addEventListener('submit',function (e){
+form.addEventListener('submit',(e)=>{
     e.preventDefault();
     const reference=document.querySelector('.reference').value;
 var myHeaders = new Headers();
@@ -144,11 +144,19 @@ var requestOptions = {
   body: raw,
   redirect: 'follow'
 };
+
 fetch("http://localhost/brief6/User/login", requestOptions)
   .then(response => response.json())
   .then(res => {
-  localStorage.setItem('reference', JSON.stringify(res));
-   window.location.href = "./Homeclient.html";})
+      if(!res.error){
+        localStorage.setItem('reference', JSON.stringify(res[0]));
+   window.location.href = "./formreservation.html";
+      }else{
+        alert("reference incoret");
+        window.location.href = "./Login.html";
+        
+      }
+})
    .catch(error => console.log('error', error));
  });
  

@@ -18,8 +18,9 @@
             $data = $this->model->getAll();
             echo json_encode($data);
         }
-        public function getOneRendezVous($id){
-            $data = $this->model->getOne($id);
+        public function getOneRendezVous(){
+            extract(json_decode(file_get_contents('php://input'), true)); 
+            $data=$this->model->getOne($reference);
             echo json_encode($data);
         }
         public function updateRendezVous(){
